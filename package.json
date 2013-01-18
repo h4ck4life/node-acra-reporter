@@ -11,5 +11,11 @@
     "url": "git://github.com/halkeye/node-acra-reporter.git"
   },
   "author": "Gavin Mogan <gavin@kodekoan.com>",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.0.6",
+    "nodefly": "~0.1.19",
+    "ejs": "~0.8.3",
+    "ejs-locals": "~1.0.2"
+  }
 }
