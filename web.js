@@ -25,8 +25,8 @@ if (process.env.REPORTING_CREDENTIALS)
 
 // The function
 var basicAuth = express.basicAuth(function(username, password) {
-    if (!users[username]) return false;
-    return users[username] === password;
+    if (!config.users[username]) return false;
+    return config.users[username] === password;
 }, 'Restrict area, please identify');
 
 var app = express();
@@ -64,4 +64,4 @@ var routes = {
     api: require('./routes/api')
 };
 app.get('/api/', basicAuth, routes.api.index);
-app.post('/api/submit_report', basicAuth, routes.api.submit_report);
+app.post('/api/submit_acra_report', basicAuth, routes.api.submit_acra_report);
