@@ -1,0 +1,11 @@
+{
+    // ECMAScript 5.
+    "es5"           : true,   // Allow ECMAScript 5 syntax.
+    "strict"        : true,  // Require `use strict` pragma  in every file.
+    "globalstrict"  : true,  // Allow global "use strict" (also enables 'strict').
+    // Require all non-global variables be declared before they are used.
+    "undef":  true,
+    // Node 
+    "node": true,
+    "unused": true
+}
