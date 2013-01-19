@@ -3,9 +3,9 @@ var async = require('async');
 var _ = require('underscore');
 
 var fields = {
-    "Android Version":{"ANDROID_VERSION":1},
-    "Application":{"PACKAGE_NAME":1},
-    "Application Version": {"PACKAGE_NAME":1,"APP_VERSION_CODE":1,"APP_VERSION_NAME":1}
+    "Android Version":"doc.ANDROID_VERSION",
+    "Application":"doc.PACKAGE_NAME",
+    "Application Version": "doc.PACKAGE_NAME + ' - ' + doc.APP_VERSION_CODE + '(' + doc.APP_VERSION_NAME + ')'"
 };
 var topLevel = function(req,res) {
     var results = {};
@@ -13,10 +13,7 @@ var topLevel = function(req,res) {
         var $keyf = "function(doc) { var daydate = doc.report_time; ";
         $keyf += "daydate.setHours(0); daydate.setMinutes(0); daydate.setSeconds(0); daydate.setMilliseconds(0);"; 
         $keyf += "return { "; 
-        /*Object.keys(fields[item]).forEach(function(item) {
-            $keyf += item + ": doc." + item + ",";
-        });*/
-        $keyf += "value: [" + _.map(fields[item], function(str,val) { return 'doc.' + val; }).join(',') + "].join('-'),";
+        $keyf += "value: " + fields[item] + ",";
         $keyf += "date: daydate.getTime()";
         /* produces GMT date */
         //$keyf += "date: Math.floor(doc.report_time.getTime() / 1000) - Math.floor((doc.report_time.getTime() / 1000) % 86400)";
