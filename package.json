@@ -18,7 +18,8 @@
     "nodefly": "~0.1.19",
     "ejs": "~0.8.3",
     "ejs-locals": "~1.0.2",
-    "mongodb": "~1.2.9"
+    "mongodb": "~1.2.9",
+    "async": "~0.1.22"
   },
   "devDependencies": {
     "nodeunit": "~0.7.4"

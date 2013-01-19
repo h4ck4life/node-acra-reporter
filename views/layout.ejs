@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
   <head>
@@ -10,6 +9,7 @@
     <link href="/css/style.css" rel="stylesheet" media="screen">
     <%-stylesheets%>
     <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
   </head>
   <body>
     <header>
@@ -19,7 +19,6 @@
         <div class="container-fluid">
           <div class="row-fluid">
             <div class="span2">
-              <img src="/img/logo.png" />
               <!--Sidebar content-->
               <% if (!user) { %>
                   <a href="/auth/google">Sign In with Google</a>
@@ -44,13 +43,7 @@
         <%-blocks.footer%>
     </footer>
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/libs/jqplot/jquery.jqplot.min.js"></script>
-    <script type="text/javascript" src="/libs/jqplot/jqplot.pieRenderer.min.js"></script>
-    <script type="text/javascript" src="/libs/jqplot/jqplot.dateAxisRenderer.min.js"></script>
-    <script type="text/javascript" src="/libs/jqplot/jqplot.highlighter.min.js"></script>
-    <script type="text/javascript" src="/libs/jqplot/jqplot.cursor.min.js"></script>
     <%-scripts%>
   </body>
 </html>

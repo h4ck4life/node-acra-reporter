@@ -1,2 +1,8 @@
 <% layout('../layout') -%>
 
+<%- block('scripts', script('http://code.highcharts.com/highcharts.js')) %>
+<%- block('scripts', script('http://code.highcharts.com/modules/exporting.js')) %>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+<%- block('scripts', script('/js/base/index.js')) %>
