@@ -53,8 +53,6 @@ var startExpress = function(db) {
 
     app.configure(function() {
         app.engine('ejs', require('ejs-locals'));
-        app.set('view engine', 'ejs');
-        app.set('view options', { 'layout':'layout.ejs'} );
         app.use(express.logger());
         app.use(express['static'](__dirname + '/public'));
         app.use(express.bodyParser());

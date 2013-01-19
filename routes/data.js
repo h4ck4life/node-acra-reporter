@@ -1,5 +1,6 @@
 "use strict";
 var async = require('async');
+var _ = require('underscore');
 
 var fields = {
     "Android Version":{"ANDROID_VERSION":1},
@@ -12,13 +13,15 @@ var topLevel = function(req,res) {
         var $keyf = "function(doc) { var daydate = doc.report_time; ";
         $keyf += "daydate.setHours(0); daydate.setMinutes(0); daydate.setSeconds(0); daydate.setMilliseconds(0);"; 
         $keyf += "return { "; 
-        Object.keys(fields[item]).forEach(function(item) {
+        /*Object.keys(fields[item]).forEach(function(item) {
             $keyf += item + ": doc." + item + ",";
-        });
-        $keyf += "date: Math.floor(daydate.getTime())";
+        });*/
+        $keyf += "value: [" + _.map(fields[item], function(str,val) { return 'doc.' + val; }).join(',') + "].join('-'),";
+        $keyf += "date: daydate.getTime()";
         /* produces GMT date */
         //$keyf += "date: Math.floor(doc.report_time.getTime() / 1000) - Math.floor((doc.report_time.getTime() / 1000) % 86400)";
         $keyf += "}}";
+        console.log($keyf);
 
         req.mongo.executeDbCommand({
             group: {

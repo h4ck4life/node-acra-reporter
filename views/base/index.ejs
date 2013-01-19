@@ -1,8 +1,10 @@
 <% layout('../layout') -%>
 
-<%- block('scripts', script('http://code.highcharts.com/highcharts.js')) %>
-<%- block('scripts', script('http://code.highcharts.com/modules/exporting.js')) %>
+<% script('http://code.highcharts.com/highcharts.js') %>
+<% script('http://code.highcharts.com/modules/exporting.js') %>
+<% script('/js/base/index.js') %>
 
-<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="graph_android_version" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="graph_application_version" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="graph_application" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
-<%- block('scripts', script('/js/base/index.js')) %>
