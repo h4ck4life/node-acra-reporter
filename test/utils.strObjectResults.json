@@ -1,4 +1,7 @@
 { 
+  "other": {
+    "fake_step": 1
+  },
   "DEVICE_FEATURES": [ 
     "android.hardware.wifi",
      "android.hardware.location.network",
