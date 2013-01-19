@@ -66,6 +66,9 @@ var startExpress = function(db) {
         app.use(express.favicon());
         app.use(function(req,res,next) {
             req.mongo = db;
+
+            res.locals.user = null;
+
             next();
         });
         app.use(app.router);
