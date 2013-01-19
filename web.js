@@ -9,7 +9,6 @@ if (process.env.NODEFLY_KEY)
     );
 }
 var express = require('express');
-var express_resource = require('express-resource');
 var util    = require('util');
 var url     = require("url");
 var fs      = require('fs');
