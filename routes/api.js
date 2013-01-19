@@ -14,10 +14,10 @@
     var states = require('../lib/states');
     var myutils = require('../lib/utils');
 
-    exports.index = function(req,res) {
+    var index = function(req,res) {
         res.send("Nothing here");
     };
-    exports.submit_acra_report = function(req, res) {
+    var submit_acra_report = function(req, res) {
         var report = myutils.strObjectToData(req.body);
         report.report_time = new Date();
         report.state = states.STATE_NEW;
@@ -30,5 +30,10 @@
             }
             res.send("OK");
         });
+    };
+
+    exports.setupRoutes = function(app) {
+        app.get('/api/', app.basicAuth, index);
+        app.post('/api/submit_acra_report', app.basicAuth, submit_acra_report);
     };
 })();

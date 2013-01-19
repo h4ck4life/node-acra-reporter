@@ -10,8 +10,10 @@
         );
     }
     var express = require('express');
+    var express_resource = require('express-resource');
     var util    = require('util');
     var url     = require("url");
+    var fs      = require('fs');
     var MongoClient = require('mongodb').MongoClient;
 
     /* Config */
@@ -20,6 +22,18 @@
         users: {},
         mongodb: process.env.MONGO_URL || 'mongodb://localhost/node-acra-reporting'
     };
+
+    var routes = {};
+    fs.readdir(__dirname + '/routes/', function(err, files) {
+        files.forEach(function(file) {
+            if (file.substr(-3) === '.js') {
+                console.log("Now loading route file: ", file.trim());
+                var basename = file.substr(0,file.length-3);
+                routes[basename] = require('./routes/'+basename);
+            }
+        });
+    });
+
     if (process.env.REPORTING_CREDENTIALS)
     {
         process.env.REPORTING_CREDENTIALS.split(',').forEach(function(a) {
@@ -28,16 +42,17 @@
         });
     }
 
-    /* Basic Auth Function */
-    var basicAuth = express.basicAuth(function(username, password) {
-        if (!config.users[username]) return false;
-        return config.users[username] === password;
-    }, 'Restrict area, please identify');
-
     /* Callback after everything else is connected  to start express */
     var startExpress = function(db) {
 
         var app = express();
+
+        /* Basic Auth Function */
+        app.basicAuth = express.basicAuth(function(username, password) {
+            if (!config.users[username]) return false;
+            return config.users[username] === password;
+        }, 'Restrict area, please identify');
+
         app.configure(function() {
             app.engine('ejs', require('ejs-locals'));
             app.set('view engine', 'ejs');
@@ -72,11 +87,9 @@
         app.locals.title = "ACRA Reporter";
 
         // http://stackoverflow.com/questions/9213707/express-resources-with-authentication-middleware
-        var routes = {
-            api: require('./routes/api')
-        };
-        app.get('/api/', basicAuth, routes.api.index);
-        app.post('/api/submit_acra_report', basicAuth, routes.api.submit_acra_report);
+        Object.keys(routes).forEach(function(r) {
+            routes[r].setupRoutes(app);
+        });
 
     };
 
