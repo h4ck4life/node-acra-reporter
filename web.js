@@ -14,17 +14,11 @@ var url     = require("url");
 var fs      = require('fs');
 var models = require('./lib/models');
 var mongoose = require('mongoose');
-var routes = {};
-
-fs.readdir(__dirname + '/lib/routes/', function(err, files) {
-    files.forEach(function(file) {
-        if (file.substr(-3) === '.js') {
-            console.log("Now loading route file: ", file.trim());
-            var basename = file.substr(0,file.length-3);
-            routes[basename] = require('./lib/routes/'+basename);
-        }
-    });
-});
+var routes = [
+    "./lib/routes/base",
+    "./lib/routes/api",
+    "./lib/routes/data"
+];
 
 /* Config */
 
@@ -56,11 +50,13 @@ var startExpress = function(db) {
         // http://www.senchalabs.org/connect/favicon.html
         app.use(express.favicon());
         app.use(function(req,res,next) {
+            res.locals.title = "ACRA Reporter";
             res.locals.user = null;
             next();
         });
-        Object.keys(routes).forEach(function(r) {
-            app.use(routes[r]);
+        routes.forEach(function(r) {
+            console.log("Now loading route: ", r);
+            app.use(require(r));
         });
         app.use(app.router);
 
@@ -75,9 +71,4 @@ var startExpress = function(db) {
     app.listen(port, function() {
         console.log("Listening on " + port);
     });
-
-    app.locals.title = "ACRA Reporter";
-
-    // http://stackoverflow.com/questions/9213707/express-resources-with-authentication-middleware
-
 };
