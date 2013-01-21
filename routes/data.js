@@ -4,7 +4,6 @@ var _ = require('underscore');
 
 var fields = {
     "Android Version":"doc.ANDROID_VERSION",
-    "Application":"doc.PACKAGE_NAME",
     "Application Version": "doc.PACKAGE_NAME + ' - ' + doc.APP_VERSION_CODE + '(' + doc.APP_VERSION_NAME + ')'"
 };
 var topLevel = function(req,res) {

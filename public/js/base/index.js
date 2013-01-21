@@ -6,12 +6,8 @@
             chart: { renderTo: 'graph_android_version' },
             title: { text: 'Crash Breakdown by Android Version' }
         },
-        'Application': {
-            chart: { renderTo: 'graph_application_version' },
-            title: { text: 'Crash Breakdown by Application' }
-        },
         'Application Version': {
-            chart: { renderTo: 'graph_application' },
+            chart: { renderTo: 'graph_application_version' },
             title: { text: 'Crash Breakdown by Application Version' }
         }
     };
