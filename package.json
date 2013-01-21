@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "My Acra Reporter",
   "main": "index.js",
+  "engines": {
+    "node": "0.8.x",
+    "npm":  "1.1.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run": "bin/run"
