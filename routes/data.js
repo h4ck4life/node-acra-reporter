@@ -1,6 +1,7 @@
 "use strict";
 var async = require('async');
 var _ = require('underscore');
+var mongoose = require('mongoose');
 
 var fields = {
     "Android Version":"doc.ANDROID_VERSION",
@@ -19,7 +20,7 @@ var topLevel = function(req,res) {
         $keyf += "}}";
         console.log($keyf);
 
-        req.mongo.executeDbCommand({
+        mongoose.connection.db.executeDbCommand({
             group: {
                 ns: 'reports',
                 //key: fields[item],
