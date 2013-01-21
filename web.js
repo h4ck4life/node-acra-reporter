@@ -12,7 +12,8 @@ var express = require('express');
 var util    = require('util');
 var url     = require("url");
 var fs      = require('fs');
-var MongoClient = require('mongodb').MongoClient;
+var models = require('./lib/models');
+var mongoose = require('mongoose');
 
 /* Config */
 
@@ -20,6 +21,12 @@ var config = {
     users: {},
     mongodb: process.env.MONGO_URL || 'mongodb://localhost/node-acra-reporting'
 };
+
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+mongoose.connection.once('open', function callback () {
+    startExpress();
+});
+mongoose.connect(config.mongodb);
 
 var routes = {};
 fs.readdir(__dirname + '/routes/', function(err, files) {
@@ -32,18 +39,18 @@ fs.readdir(__dirname + '/routes/', function(err, files) {
     });
 });
 
-if (process.env.REPORTING_CREDENTIALS)
-{
-    process.env.REPORTING_CREDENTIALS.split(',').forEach(function(a) {
-        var sp = a.split(':');
-        config.users[sp[0]] = sp[1];
-    });
-}
-
 /* Callback after everything else is connected  to start express */
 var startExpress = function(db) {
 
     var app = express();
+    models.Application.find().exec(function(err, apps) {
+        apps.forEach(function(app) {
+            app.api_credentials.forEach(function(cred) {
+                console.log("Adding credential: " + cred.username);
+                config.users[cred.username] = cred.passport;
+            });
+        });
+    });
 
     /* Basic Auth Function */
     app.basicAuth = express.basicAuth(function(username, password) {
@@ -63,10 +70,7 @@ var startExpress = function(db) {
         // http://www.senchalabs.org/connect/favicon.html
         app.use(express.favicon());
         app.use(function(req,res,next) {
-            req.mongo = db;
-
             res.locals.user = null;
-
             next();
         });
         app.use(app.router);
@@ -91,12 +95,3 @@ var startExpress = function(db) {
     });
 
 };
-
-MongoClient.connect(config.mongodb, function(err, db) {
-    if (err) {
-        console.error('connection error:', err);
-    } else {
-        console.log("Connected to ", config.mongodb);
-        startExpress(db);
-    }
-});

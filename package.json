@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": "0.8.x",
-    "npm":  "1.1.x"
+    "npm": "1.1.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,9 +22,9 @@
     "nodefly": "~0.1.19",
     "ejs": "~0.8.3",
     "ejs-locals": "~1.0.2",
-    "mongodb": "~1.2.9",
     "async": "~0.1.22",
-    "underscore": "~1.4.3"
+    "underscore": "~1.4.3",
+    "mongoose": "~3.5.4"
   },
   "devDependencies": {
     "nodeunit": "~0.7.4"

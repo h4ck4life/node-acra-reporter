@@ -9,7 +9,7 @@ var hashFields = {
     'ENVIRONMENT':1
 };
 
-var mongo = require('mongodb');
+var mongoose = require('mongoose');
 var states = require('../lib/states');
 var myutils = require('../lib/utils');
 
@@ -21,7 +21,7 @@ var submit_acra_report = function(req, res) {
     report.report_time = new Date();
     report.state = states.STATE_NEW;
 
-    req.mongo.collection('reports').insert(report, {w:1}, function(err, result) {
+    mongoose.connection.collection('reports').insert(report, {w:1}, function(err, result) {
         if (err) {
             console.error("Error inserting into mongo:", err, result);
             res.send("FAIL",500);

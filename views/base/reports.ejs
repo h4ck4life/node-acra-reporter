@@ -1,0 +1,25 @@
+<% layout('../layout') -%>
+<table>
+    <thead>
+        <tr>
+            <th nowrap>ID</th>
+            <th nowrap>Time</th>
+            <th nowarp>Package</th>
+            <th nowrap>Version</th>
+            <th nowrap>Android Version</th>
+            <th nowrap>Stack Trace</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% reports.forEach(function(report){ %>
+        <tr>
+            <td><%= report._id %></td>
+            <td nowrap><%= report.getValue('report_time') %></td>
+            <td nowrap><%= report.getValue('PACKAGE_NAME') %></td>
+            <td nowrap><%= report.getValue('APP_VERSION_NAME') %> (<%= report.getValue('APP_VERSION_CODE') %>)</td>
+            <td nowrap><%= report.getValue('ANDROID_VERSION') %></td>
+            <td nowrap><%= report.getValue('STACK_TRACE')[0] %></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
