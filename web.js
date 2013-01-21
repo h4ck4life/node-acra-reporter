@@ -29,12 +29,12 @@ mongoose.connection.once('open', function callback () {
 mongoose.connect(config.mongodb);
 
 var routes = {};
-fs.readdir(__dirname + '/routes/', function(err, files) {
+fs.readdir(__dirname + '/lib/routes/', function(err, files) {
     files.forEach(function(file) {
         if (file.substr(-3) === '.js') {
             console.log("Now loading route file: ", file.trim());
             var basename = file.substr(0,file.length-3);
-            routes[basename] = require('./routes/'+basename);
+            routes[basename] = require('./lib/routes/'+basename);
         }
     });
 });
