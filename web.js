@@ -14,6 +14,17 @@ var url     = require("url");
 var fs      = require('fs');
 var models = require('./lib/models');
 var mongoose = require('mongoose');
+var routes = {};
+
+fs.readdir(__dirname + '/lib/routes/', function(err, files) {
+    files.forEach(function(file) {
+        if (file.substr(-3) === '.js') {
+            console.log("Now loading route file: ", file.trim());
+            var basename = file.substr(0,file.length-3);
+            routes[basename] = require('./lib/routes/'+basename);
+        }
+    });
+});
 
 /* Config */
 
@@ -28,36 +39,11 @@ mongoose.connection.once('open', function callback () {
 });
 mongoose.connect(config.mongodb);
 
-var routes = {};
-fs.readdir(__dirname + '/lib/routes/', function(err, files) {
-    files.forEach(function(file) {
-        if (file.substr(-3) === '.js') {
-            console.log("Now loading route file: ", file.trim());
-            var basename = file.substr(0,file.length-3);
-            routes[basename] = require('./lib/routes/'+basename);
-        }
-    });
-});
 
 /* Callback after everything else is connected  to start express */
 var startExpress = function(db) {
 
     var app = express();
-    models.Application.find().exec(function(err, apps) {
-        apps.forEach(function(app) {
-            app.api_credentials.forEach(function(cred) {
-                console.log("Adding credential: " + cred.username);
-                config.users[cred.username] = cred.passport;
-            });
-        });
-    });
-
-    /* Basic Auth Function */
-    app.basicAuth = express.basicAuth(function(username, password) {
-        if (!config.users[username]) return false;
-        return config.users[username] === password;
-    }, 'Restrict area, please identify');
-
     app.configure(function() {
         app.engine('ejs', require('ejs-locals'));
         app.use(express.logger());
@@ -72,6 +58,9 @@ var startExpress = function(db) {
         app.use(function(req,res,next) {
             res.locals.user = null;
             next();
+        });
+        Object.keys(routes).forEach(function(r) {
+            app.use(routes[r]);
         });
         app.use(app.router);
 
@@ -90,8 +79,5 @@ var startExpress = function(db) {
     app.locals.title = "ACRA Reporter";
 
     // http://stackoverflow.com/questions/9213707/express-resources-with-authentication-middleware
-    Object.keys(routes).forEach(function(r) {
-        routes[r].setupRoutes(app);
-    });
 
 };
