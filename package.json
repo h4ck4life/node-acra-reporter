@@ -27,6 +27,10 @@
     "mongoose": "~3.5.4"
   },
   "devDependencies": {
-    "nodeunit": "~0.7.4"
+    "nodeunit": "~0.7.4",
+    "dox": "~0.4.2",
+    "grunt-dox": "~0.2.2",
+    "grunt": "~0.3.17",
+    "grunt-check-modules": "~0.1.0"
   }
 }
