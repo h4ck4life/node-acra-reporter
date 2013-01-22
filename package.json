@@ -31,7 +31,8 @@
     "grunt": "stable",
     "dox": "stable",
     "grunt-dox": "stable",
-    "grunt-check-modules": "stable"
+    "grunt-check-modules": "stable",
+    "grunt-heroku-deploy": "~0.1.1"
   },
   "optionalDependencies": {
     "foreman": "stable",

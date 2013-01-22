@@ -19,11 +19,17 @@ module.exports = function(grunt) {
         src: ['lib/**/*.js'],
         dest: 'docs'
       }
+    },
+    'heroku-deploy' : {
+        master : {
+            deployBranch : 'deploy'
+        }
     }
   });
 
   grunt.loadNpmTasks('grunt-dox');
   grunt.loadNpmTasks('grunt-check-modules');
+  grunt.loadNpmTasks('grunt-heroku-deploy');
 
   // Default task.
   grunt.registerTask('default', 'lint dox check-modules');
