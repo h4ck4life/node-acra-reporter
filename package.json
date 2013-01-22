@@ -30,6 +30,7 @@
     "nodeunit": "stable",
     "grunt": "stable",
     "dox": "stable",
+    "dox-foundation": "stable",
     "grunt-dox": "stable",
     "grunt-check-modules": "stable",
     "grunt-heroku-deploy": "~0.1.1"
