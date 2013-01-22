@@ -52,6 +52,7 @@ var startExpress = function(db) {
             res.locals.title = "ACRA Reporter";
             res.locals.current_path = req.path;
             res.locals.user = {};
+            res.locals.ga = process.env.GOOGLE_ANALYTICS_KEY;
             next();
         });
         routes.forEach(function(r) {
