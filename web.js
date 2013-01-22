@@ -50,7 +50,8 @@ var startExpress = function(db) {
         app.use(express.favicon());
         app.use(function(req,res,next) {
             res.locals.title = "ACRA Reporter";
-            res.locals.user = null;
+            res.locals.current_path = req.path;
+            res.locals.user = {};
             next();
         });
         routes.forEach(function(r) {
