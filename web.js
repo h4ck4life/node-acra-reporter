@@ -16,8 +16,7 @@ var models = require('./lib/models');
 var mongoose = require('mongoose');
 var routes = [
     "./lib/routes/base",
-    "./lib/routes/api",
-    "./lib/routes/data"
+    "./lib/routes/api"
 ];
 
 /* Config */
