@@ -26,6 +26,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-check-modules');
 
   // Default task.
-  grunt.registerTask('default', 'lint dox');
+  grunt.registerTask('default', 'lint dox check-modules');
 
 };
