@@ -33,7 +33,7 @@
             series: []
         };
         
-        jQuery.getJSON('/data/topLevel', function(data) {
+        jQuery.getJSON('/api/topLevel', function(data) {
             jQuery.each(Object.keys(charts), function(idx, elm) {
                 var chartOptions = jQuery.extend(true, {}, options, charts[elm]);
                 var values = {};
