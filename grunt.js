@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -24,12 +24,19 @@ module.exports = function(grunt) {
         master : {
             deployBranch : 'deploy'
         }
-    }
+    },
+    markdown: {
+        all: {
+          files: ['README.md'],
+          dest: 'docs/'
+        }
+      }
   });
 
   grunt.loadNpmTasks('grunt-dox');
   grunt.loadNpmTasks('grunt-check-modules');
   grunt.loadNpmTasks('grunt-heroku-deploy');
+  grunt.loadNpmTasks('grunt-markdown');
 
   // Default task.
   grunt.registerTask('default', 'lint dox check-modules');
