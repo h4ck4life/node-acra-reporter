@@ -1,7 +1,7 @@
 Acra Reporting
 ==============
 
-[![Build Status](https://travis-ci.org/[halkeye]/[node-acra-reporter].png)](https://travis-ci.org/[halkeye]/[node-acra-reporter])
+[![Build Status](https://travis-ci.org/halkeye/node-acra-reporter.png)](https://travis-ci.org/halkeye/node-acra-reporter)
 
 This is a simple too I've started to learn more about express and to provide a simple tool I can throw up on heroku to track any crashes from my android apps.
 
