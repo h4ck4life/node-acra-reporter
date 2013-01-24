@@ -39,6 +39,12 @@ module.exports = function(grunt) {
         }
       }
     },
+    jsduck: {
+        main: {
+            src: ['lib'],
+            dest: 'docs'
+        }
+    },
     markdown: {
         all: {
           files: ['README.md'],
@@ -52,6 +58,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-heroku-deploy');
   grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
+  grunt.loadNpmTasks('grunt-jsduck');
 
   //grunt.registerTask('docs', 'yuidoc');
   // Default task.
