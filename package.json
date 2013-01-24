@@ -8,7 +8,7 @@
     "npm": "1.1.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodeunit test",
     "run": "bin/run"
   },
   "repository": {
