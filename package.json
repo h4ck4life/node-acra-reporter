@@ -27,13 +27,13 @@
     "mongoose": "~3.5.4"
   },
   "devDependencies": {
-    "nodeunit": "stable",
-    "grunt": "stable",
-    "dox": "stable",
-    "dox-foundation": "stable",
-    "grunt-dox": "stable",
-    "grunt-check-modules": "stable",
-    "grunt-heroku-deploy": "~0.1.1"
+    "nodeunit": "latest",
+    "grunt": "latest",
+    "dox": "latest",
+    "dox-foundation": "latest",
+    "grunt-dox": "latest",
+    "grunt-check-modules": "latest",
+    "grunt-heroku-deploy": "latest"
   },
   "optionalDependencies": {
     "foreman": "stable",
