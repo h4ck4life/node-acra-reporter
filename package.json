@@ -36,7 +36,7 @@
     "grunt-heroku-deploy": "latest"
   },
   "optionalDependencies": {
-    "foreman": "stable",
-    "nodemon": "stable"
+    "foreman": "latest",
+    "nodemon": "latest"
   }
 }
