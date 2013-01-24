@@ -34,7 +34,8 @@
     "grunt-dox": "latest",
     "grunt-check-modules": "latest",
     "grunt-heroku-deploy": "latest",
-    "grunt-markdown": "~0.1.2"
+    "grunt-markdown": "~0.1.2",
+    "grunt-contrib-yuidoc": "~0.3.2"
   },
   "optionalDependencies": {
     "foreman": "latest",
