@@ -25,6 +25,7 @@ var routes = [
 
 var config = eson()
     .use(eson.ms)
+    .use(eson.args())
     .use(eson.env(""))
     .use(eson.include)
     .use(eson.dimensions)
@@ -48,8 +49,8 @@ var startExpress = function(db) {
         app.use(express['static'](__dirname + '/public'));
         app.use(express.bodyParser());
         app.use(express.cookieParser());
-        app.use(express.session({ 
-            secret: process.env.SESSION_SECRET || 'DemtAimfild9' 
+        app.use(express.session({
+            secret: config.session_secret
         }));
         // http://www.senchalabs.org/connect/favicon.html
         app.use(express.favicon());
@@ -75,8 +76,7 @@ var startExpress = function(db) {
     });
 
     // listen to the PORT given to us in the environment
-    var port = process.env.PORT || 3000;
-    app.listen(port, function() {
-        console.log("Listening on " + port);
+    app.listen(config.port, function() {
+        console.log("Listening on " + config.port);
     });
 };

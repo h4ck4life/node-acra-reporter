@@ -1,1 +1,1 @@
-env $(cat .env) nodemon -w lib -w routes -w views -w web.js web.js
+env $(cat .env) nodemon -w lib -w routes -w views -w web.js -w config.json web.js
