@@ -8,12 +8,14 @@ if (process.env.NODEFLY_KEY)
             ['acra-reporting']
     );
 }
-var express = require('express');
-var util    = require('util');
-var url     = require("url");
-var fs      = require('fs');
-var models = require('./lib/models');
+var express  = require('express');
+var util     = require('util');
+var url      = require("url");
+var fs       = require('fs');
+var models   = require('./lib/models');
 var mongoose = require('mongoose');
+var eson     = require('eson');
+
 var routes = [
     "./lib/routes/base",
     "./lib/routes/api"
@@ -21,16 +23,19 @@ var routes = [
 
 /* Config */
 
-var config = {
-    users: {},
-    mongodb: process.env.MONGO_URL || 'mongodb://localhost/node-acra-reporting'
-};
+var config = eson()
+    .use(eson.ms)
+    .use(eson.env(""))
+    .use(eson.include)
+    .use(eson.dimensions)
+    .use(eson.replace('{root}', __dirname))
+    .read('./config.json');
 
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function callback () {
     startExpress();
 });
-mongoose.connect(config.mongodb);
+mongoose.connect(config.mongo_url);
 
 
 /* Callback after everything else is connected  to start express */
