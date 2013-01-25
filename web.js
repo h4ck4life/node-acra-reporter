@@ -16,6 +16,8 @@ var models   = require('./lib/models');
 var mongoose = require('mongoose');
 var eson     = require('eson');
 
+var app = express();
+
 var routes = [
     "./lib/routes/base",
     "./lib/routes/api"
@@ -43,7 +45,6 @@ mongoose.connect(config.mongo_url);
 /* Callback after everything else is connected  to start express */
 var startExpress = function(db) {
 
-    var app = express();
     app.configure(function() {
         app.engine('ejs', require('ejs-locals'));
         app.use(express.logger());
