@@ -32,6 +32,7 @@ var config = eson()
     .use(eson.replace('{root}', __dirname))
     .read('./config.json');
 
+/* Connect to mongose */
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function callback () {
     startExpress();
@@ -58,7 +59,7 @@ var startExpress = function(db) {
             res.locals.title = "ACRA Reporter";
             res.locals.current_path = req.path;
             res.locals.user = {};
-            res.locals.ga = process.env.GOOGLE_ANALYTICS_KEY;
+            res.locals.ga = config.google_analytics_key;
             next();
         });
         routes.forEach(function(r) {

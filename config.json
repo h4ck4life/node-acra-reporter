@@ -1,5 +1,6 @@
 {
   "session_secret": "DemtAimfild9",
   "port": 3000,
-  "mongo_url": "mongodb://localhost/node-acra-reporting"
+  "mongo_url": "mongodb://localhost/node-acra-reporting",
+  "google_analytics_key": null
 }
