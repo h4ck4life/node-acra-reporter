@@ -64,7 +64,9 @@ var startExpress = function(db) {
     });
 
     app.configure('development', function(){
-        app.use(express.errorHandler());
+        var expressError = require('express-error');
+        app.use(expressError.express3({contextLinesCount: 3, handleUncaughtException: true}));
+        //app.use(express.errorHandler());
     });
 
     // listen to the PORT given to us in the environment
