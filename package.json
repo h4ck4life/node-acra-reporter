@@ -36,7 +36,8 @@
     "grunt-heroku-deploy": "latest",
     "grunt-markdown": "~0.1.2",
     "grunt-contrib-yuidoc": "~0.3.2",
-    "grunt-jsduck": "~0.1.0"
+    "grunt-jsduck": "~0.1.0",
+    "supertest": "~0.5.1"
   },
   "optionalDependencies": {
     "foreman": "latest",
