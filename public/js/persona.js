@@ -1,8 +1,14 @@
-/*global jQuery:false navigator:false user:true alert:false */
+/*global jQuery:false navigator:false user:true alert:false window:false */
 jQuery(function() {
     "use strict";
-    jQuery('#login').click(function(e){ navigator.id.request(); });
-    jQuery('#logout').click(function(e){ navigator.id.logout(); });
+    jQuery('#login').click(function(e){
+        navigator.id.request();
+        e.preventDefault();
+    });
+    jQuery('#logout').click(function(e){
+        navigator.id.logout();
+        e.preventDefault();
+    });
     navigator.id.watch({
         loggedInUser: user ? user.email : null,
         onlogin: function(assertion) {
@@ -16,14 +22,22 @@ jQuery(function() {
                         return;
                     }
                     user = assertion.email;
+                    window.location = window.location;
                 }
             );
         },
         onlogout: function() {
             jQuery.post(
-                '/persona/verify',
+                '/persona/logout',
                 {logout:1},
-                function(msg) { console.log('logout success!'); }
+                function(msg) {
+                    if (msg.status == "failure")
+                    {
+                        alert("Fail to logout in: " + msg.reason);
+                        return;
+                    }
+                    window.location = "/";
+                }
             );
         }
     });
