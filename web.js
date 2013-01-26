@@ -61,7 +61,7 @@ var startExpress = function(db) {
         // http://www.senchalabs.org/connect/favicon.html
         app.use(express.favicon());
         app.use(function(req,res,next) {
-            res.locals.title = "ACRA Reporter";
+            res.locals.title = null;
             res.locals.current_path = req.path;
             res.locals.user = null;
             if (req.session.email)
