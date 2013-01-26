@@ -15,6 +15,7 @@ var fs       = require('fs');
 var models   = require('./lib/models');
 var mongoose = require('mongoose');
 var eson     = require('eson');
+var MongoStore = require('connect-mongo')(express);
 
 var app = express();
 
@@ -52,20 +53,32 @@ var startExpress = function(db) {
         app.use(express.bodyParser());
         app.use(express.cookieParser());
         app.use(express.session({
-            secret: config.session_secret
+            secret: config.session_secret,
+            store: new MongoStore({
+                mongoose_connection: mongoose.connection
+            })
         }));
         // http://www.senchalabs.org/connect/favicon.html
         app.use(express.favicon());
         app.use(function(req,res,next) {
             res.locals.title = "ACRA Reporter";
             res.locals.current_path = req.path;
-            res.locals.user = {};
+            res.locals.user = null;
+            if (req.session.email)
+            {
+                res.locals.user = {
+                    email: req.session.email
+                };
+            }
             res.locals.ga = config.google_analytics_key;
             next();
         });
         routes.forEach(function(r) {
             console.log("Now loading route: ", r);
             app.use(require(r));
+        });
+        require("express-persona")(app, {
+              audience: config.base_url
         });
         app.use(app.router);
 

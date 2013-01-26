@@ -2,5 +2,6 @@
   "session_secret": "DemtAimfild9",
   "port": 3000,
   "mongo_url": "mongodb://localhost/node-acra-reporting",
+  "base_url":"http://ecm.kodekoan.com:5000",
   "google_analytics_key": null
 }
